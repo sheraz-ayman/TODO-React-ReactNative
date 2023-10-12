@@ -37,7 +37,7 @@ const [refreshList, setRefreshList] = useState()
       <div className="container">
         <div className="row justify-content-md-center mt-4">
           {
-            list.map((todo)=><Todo todo={todo} key={todo._id}/>)
+            list.map((todo)=><Todo todo={todo} key={todo._id} setRefreshList={setRefreshList}/>)
           }
    
         </div>

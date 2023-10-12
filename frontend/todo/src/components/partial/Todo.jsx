@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faTrash, faEdit } from '@fortawesome/free-solid-svg-icons';
 import moment from 'moment';
+import {ToastContainer, toast} from "react-toastify"
+import { deleteTodoApi } from '../../services/api';
 
-function Todo({ todo }) {
+function Todo({ todo,setRefreshList}) {
   const [isEditing, setIsEditing] = useState(false);
   const [task, setTask] = useState(todo.desc);
 
@@ -16,8 +18,17 @@ function Todo({ todo }) {
     // Implement your save functionality here
   };
 
-  const handleDelete = () => {
-    // Implement your delete functionality here
+  const handleDelete = async() => {
+    const result = await deleteTodoApi({
+      todo_id:todo._id
+    })
+
+    if (result.data.status ===200){
+      setRefreshList(new Date())
+      toast('Deleted')
+    }else{
+      toast('Failed to delete , please try again')
+    }
   };
 
   return (
@@ -27,11 +38,9 @@ function Todo({ todo }) {
           <input
             type="checkbox"
             className="form-check-input"
-            checked={todo.isCompleted}
-            readOnly // Make the checkbox read-only
           />
           <label className={`form-check-label ${todo.isCompleted ? 'text-success' : ''}`}>
-            {todo.isCompleted ? 'Completed' : 'Not Completed'}
+            {/* {todo.isCompleted ? 'Completed' : 'Not Completed'} */}
           </label>
         </div>
         {isEditing ? (
@@ -49,7 +58,7 @@ function Todo({ todo }) {
         </p>
       </div>
       <div className="card-footer d-flex justify-content-end">
-        <FontAwesomeIcon icon={faTrash} className="mr-2 text-danger" onClick={handleDelete} />
+        <FontAwesomeIcon icon={faTrash} className="mr-2 text-danger" style={{"pointer":"cursor"}} onClick={handleDelete} />
         {isEditing ? (
           <FontAwesomeIcon icon={faCheck} className="text-success" onClick={handleSave} />
         ) : (
