@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { CREATE_TODO, DELETE_TODO, LOGIN, REGISTER, TODO_LIST } from './apiConstants';
+import { CREATE_TODO, DELETE_TODO, LOGIN, MARK_TODO, REGISTER, TODO_LIST } from './apiConstants';
 
 export const login = async (data) => {
   return axios.post(LOGIN, data);
@@ -27,6 +27,17 @@ export const deleteTodoApi = async (data) => {
   
   // Pass the headers in the config object
   return axios.post(DELETE_TODO, data, {
+    headers: {
+      auth: token,
+    }
+  });
+}
+
+export const MarkTodoApi = async (data) => {
+  let token = getToken();
+  
+  // Pass the headers in the config object
+  return axios.post(MARK_TODO, data, {
     headers: {
       auth: token,
     }
