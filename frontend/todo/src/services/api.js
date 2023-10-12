@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { CREATE_TODO, LOGIN, REGISTER } from './apiConstants';
+import { CREATE_TODO, LOGIN, REGISTER, TODO_LIST } from './apiConstants';
 
 export const login = async (data) => {
   return axios.post(LOGIN, data);
@@ -20,6 +20,21 @@ export const createTodoApi = async (data) => {
     }
   });
 }
+
+export const getTodoListApi = async (data) => {
+    let token = getToken();
+    console.log(token, 'token');
+    
+    return axios.get(TODO_LIST,  {
+      headers: {
+        auth: token,
+      }
+    });
+  }
+
+
+
+
 
 export function getToken() {
   let user = localStorage.getItem('user');

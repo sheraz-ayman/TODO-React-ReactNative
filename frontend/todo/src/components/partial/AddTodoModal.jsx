@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import {ToastContainer, toast} from "react-toastify"
+import 'react-toastify/dist/ReactToastify.css'
 import { createTodoApi } from '../../services/api';
 
-function AddTodoModal() {
+function AddTodoModal({setRefreshList}) {
   const [todoDesc, setTodoDesc] = useState('');
 
   const handleTodoSubmit = async () => {
@@ -19,6 +19,7 @@ function AddTodoModal() {
       if (result && result.data) {
         if (result.data.status === 200) {
           toast('Todo Added');
+          setRefreshList(new Date())
         } else if (result.data.message) {
           toast(result.data.message);
         } else {
@@ -37,7 +38,6 @@ function AddTodoModal() {
   return (
     <div>
       <div className="modal mt-5" id="exampleModal" tabIndex="-1" role="dialog">
-        <ToastContainer />
         <div className="modal-dialog" role="document">
           <div className="modal-content">
             <div className="modal-header">
@@ -57,7 +57,7 @@ function AddTodoModal() {
               </div>
             </div>
             <div className="modal-footer">
-              <button className="btn btn-secondary" onClick={handleTodoSubmit}>Save Todo</button>
+              <button className="btn btn-secondary" onClick={handleTodoSubmit}  data-bs-dismiss="modal">Save Todo</button>
               <button className="btn btn-secondary" data-bs-dismiss="modal" onClick={() => { setTodoDesc('') }}>Close</button>
             </div>
           </div>
