@@ -3,8 +3,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import { login } from '../../services/api';
 import {ToastContainer, toast} from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css'
+import Header from '../../components/partial/Header';
 
-function Login({user,setUser}) {
+function Login() {
   const navigation=useNavigate()
 
   const [form,setForm]=useState({
@@ -13,8 +14,9 @@ function Login({user,setUser}) {
   });
 
   useEffect(()=>{
+    const user = localStorage.getItem('user')
     if(user){
-      navigation('/')
+     return navigation('/')
     }
   },[])
 
@@ -50,6 +52,8 @@ function Login({user,setUser}) {
   };
   
   return (
+    <>
+    <Header/>
     <div className="container">
       <ToastContainer/>
       <div className="row justify-content-center mt-5">
@@ -102,6 +106,7 @@ function Login({user,setUser}) {
         </div>
       </div>
     </div>
+    </>
   );
 }
 
