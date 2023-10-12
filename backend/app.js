@@ -3,6 +3,10 @@ import apiRoute, { apiProtected } from "./routes/api.js";
 import mongoose from "mongoose"
 import { DB_CONNECT } from "./utils/constants.js";
 import AuthMiddleware from "./middlewares/AuthMiddleware.js";
+import cors from 'cors'
+
+
+app.use(cors())
 
 const app=express();
 
