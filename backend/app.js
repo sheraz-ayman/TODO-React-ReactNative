@@ -6,9 +6,10 @@ import AuthMiddleware from "./middlewares/AuthMiddleware.js";
 import cors from 'cors'
 
 
-app.use(cors())
 
 const app=express();
+
+app.use(cors())
 
 mongoose.connect(DB_CONNECT);
 const PORT = 8000
