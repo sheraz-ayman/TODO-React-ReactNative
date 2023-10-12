@@ -7,6 +7,7 @@ import { LoginSchema } from "../validationSchema/LoginSchema.js";
 import { createTodo } from "../controllers/Todo.controller.js";
 import { GetTodos } from "../controllers/TodoList.controllers.js";
 import { MarkTodo } from "../controllers/MarkTodo.controller.js";
+import { RemoveTodo } from "../controllers/RemoveTodo.controller.js";
 
 const apiRoute = express.Router();
 export const apiProtected = express.Router();
@@ -26,5 +27,9 @@ apiProtected.get("/todolist",
 
 apiProtected.post("/marktodo", [check("todo_id", "Todo id is required").exists()],
     MarkTodo
+)
+
+apiProtected.post("/deleteTodo", [check("todo_id", "Todo id is required").exists()],
+    RemoveTodo
 )
 export default apiRoute
