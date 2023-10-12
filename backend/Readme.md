@@ -1,4 +1,4 @@
 -This is the backend of the todo list app/website 
 -user can do all the CRUD operation
 -it is secure and there is validation in all inputs
--start the app by using npm run dev : npm run dev
+-start the app by using: npm run dev
