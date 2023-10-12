@@ -1,8 +1,21 @@
 import React from 'react';
 import Header from '../../components/partial/Header';
 import Todo from '../../components/partial/Todo';
+import AddTodoModal from '../../components/partial/AddTodoModal';
+import { getToken } from '../../services/api';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function Home() {
+
+const navigation=useNavigate()
+
+  useEffect(() => {
+    if(!getToken()){
+      navigation('/login')
+    }
+  }, [])
+  
   return (
     <div>
       <Header />
@@ -25,29 +38,7 @@ function Home() {
         </button>
       </div>
 
-      <div className="modal" id="exampleModal" tabIndex="-1" role="dialog">
-        <div className="modal-dialog" role="document">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title">Add new task</h5>
-              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              <span arial-hidden='true'></span>
-            </div>
-            <div className="modal-body">
-              <div className="form-group">
-                <textarea name='' className='form-control' rows={3} placeholder='enter todos...'>
-
-                </textarea>
-              </div>
-            </div>
-
-            <div className="modal-footer">
-              <button className='btn btn-secondary'>Save Todo</button>
-              <button className='btn btn-secondary' data-bs-dismiss='modal'>Close</button>
-            </div>
-          </div>
-        </div>
-      </div>
+      <AddTodoModal/>
     </div>
   );
 }
