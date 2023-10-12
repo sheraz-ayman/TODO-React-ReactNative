@@ -4,11 +4,13 @@ import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
 import TodoList from './pages/Todos/TodoList';
 import TodoForm from './pages/Todos/TodoForm';
+import Header from './components/partial/Header';
 
 function App() {
   return (
     <>
     <BrowserRouter>
+    <Header/>
     <Routes>
       <Route path='/' element={<Login/>}></Route>
       <Route path='/register' element={<Register/>}></Route>
